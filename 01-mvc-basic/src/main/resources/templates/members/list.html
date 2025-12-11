@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 목록</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>회원 목록</h1>
+
+    <div class="table-info">
+      <p>총 <strong th:text="${#lists.size(members)}">0</strong>명의 회원이 있습니다.</p>
+    </div>
+
+    <!-- 회원이 있을 때 -->
+    <div th:if="${!#lists.isEmpty(members)}" class="table-container">
+      <table class="member-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>이름</th>
+          <th>이메일</th>
+          <th>나이</th>
+          <th>액션</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- members 리스트를 반복 -->
+        <tr th:each="member, iterStat : ${members}"
+            th:classappend="${iterStat.odd} ? 'odd' : 'even'">
+          <td th:text="${member.id}">1</td>
+          <td th:text="${member.name}">김철수</td>
+          <td th:text="${member.email}">kim@example.com</td>
+          <td th:text="${member.age}">28</td>
+          <td>
+            <a th:href="@{/members/{id}(id=${member.id})}" class="btn btn-sm">상세보기</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 회원이 없을 때 -->
+    <div th:if="${#lists.isEmpty(members)}" class="empty-state">
+      <p>📭 등록된 회원이 없습니다.</p>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 학습 포인트</h3>
+      <ul>
+        <li><code>th:each</code>: 리스트를 반복하여 테이블 행 생성</li>
+        <li><code>th:text</code>: 데이터를 텍스트로 출력</li>
+        <li><code>th:href</code>: 동적 URL 생성</li>
+        <li><code>th:if</code>: 조건부 렌더링</li>
+        <li><code>${#lists.isEmpty()}</code>: Thymeleaf 유틸리티 객체</li>
+        <li><code>iterStat</code>: 반복 상태 (index, count, odd/even 등)</li>
+      </ul>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/api/members}" class="btn">JSON API 보기</a>
+      <a th:href="@{/}" class="btn btn-secondary">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

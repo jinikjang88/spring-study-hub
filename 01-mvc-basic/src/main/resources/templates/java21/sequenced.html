@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java 21 Sequenced Collections</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>📚 Java 21 Sequenced Collections</h1>
+
+    <div class="result-card">
+      <h2>컬렉션 데이터</h2>
+      <div class="collection-display">
+        <p><strong>전체 리스트:</strong></p>
+        <ul>
+          <li th:each="item : ${list}" th:text="${item}">item</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>첫 번째 요소:</strong> <code th:text="${first}">first</code></p>
+          <p><strong>마지막 요소:</strong> <code th:text="${last}">last</code></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-example">
+      <h3>📝 새로운 API 메서드</h3>
+      <pre><code>// Java 21 SequencedCollection 인터페이스
+var list = new ArrayList&lt;String&gt;();
+list.add("first");
+list.add("second");
+list.add("third");
+
+// 새로운 메서드들
+String first = list.getFirst();      // 첫 번째 요소
+String last = list.getLast();        // 마지막 요소
+list.addFirst("zero");               // 맨 앞에 추가
+list.addLast("fourth");              // 맨 뒤에 추가
+list.removeFirst();                  // 첫 번째 제거
+list.removeLast();                   // 마지막 제거
+var reversed = list.reversed();      // 역순 뷰</code></pre>
+    </div>
+
+    <div class="feature-box">
+      <h3>✨ Sequenced Collections 계층 구조</h3>
+      <div class="hierarchy">
+                    <pre>
+SequencedCollection
+├── List (기존 인터페이스)
+│   ├── ArrayList
+│   └── LinkedList
+├── Deque
+│   ├── ArrayDeque
+│   └── LinkedList
+└── (새로운 공통 인터페이스)
+
+SequencedSet
+├── LinkedHashSet
+└── SortedSet
+    └── TreeSet
+
+SequencedMap
+├── LinkedHashMap
+└── SortedMap
+    └── TreeMap
+                    </pre>
+      </div>
+    </div>
+
+    <div class="comparison-section">
+      <h2>이전 vs 이후</h2>
+      <div class="comparison-grid">
+        <div class="comparison-card before">
+          <h3>❌ Java 21 이전</h3>
+          <pre><code>// 첫 번째 요소
+String first = list.get(0);
+
+// 마지막 요소
+String last = list.get(list.size() - 1);
+
+// 맨 앞에 추가
+list.add(0, "zero");
+
+// 맨 뒤에 추가
+list.add(list.size(), "last");
+
+// 역순 조회
+Collections.reverse(list);</code></pre>
+        </div>
+
+        <div class="comparison-card after">
+          <h3>✅ Java 21 이후</h3>
+          <pre><code>// 첫 번째 요소
+String first = list.getFirst();
+
+// 마지막 요소
+String last = list.getLast();
+
+// 맨 앞에 추가
+list.addFirst("zero");
+
+// 맨 뒤에 추가
+list.addLast("last");
+
+// 역순 뷰
+var reversed = list.reversed();</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefits-section">
+      <h3>🎯 주요 이점</h3>
+      <ul class="benefit-list">
+        <li>
+          <strong>일관된 API:</strong>
+          <p>List, Deque, Set 등에서 동일한 메서드 사용</p>
+        </li>
+        <li>
+          <strong>가독성 향상:</strong>
+          <p><code>getFirst()</code>가 <code>get(0)</code>보다 명확</p>
+        </li>
+        <li>
+          <strong>안전성:</strong>
+          <p>인덱스 계산 오류 방지</p>
+        </li>
+        <li>
+          <strong>성능:</strong>
+          <p><code>reversed()</code>는 뷰를 반환하여 복사 불필요</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 reversed() 메서드의 특징</h3>
+      <p>
+        <code>reversed()</code>는 역순 <strong>뷰(View)</strong>를 반환합니다.
+        즉, 데이터를 복사하지 않고 원본 컬렉션을 역순으로 보는 방식입니다.
+      </p>
+      <pre><code>var list = List.of(1, 2, 3);
+var reversed = list.reversed();  // [3, 2, 1]
+
+// 원본을 수정하면 뷰도 영향을 받음 (mutable 컬렉션의 경우)</code></pre>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/java21/pattern/string}" class="btn">Pattern Matching 예제</a>
+      <a th:href="@{/java21/virtual-thread}" class="btn">Virtual Thread 예제</a>
+      <a th:href="@{/}" class="btn btn-secondary">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

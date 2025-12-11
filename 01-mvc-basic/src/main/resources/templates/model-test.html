@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Model 테스트</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>Model 데이터 테스트</h1>
+
+    <!-- 단일 값 -->
+    <div class="section">
+      <h2>📝 단일 값</h2>
+      <div class="data-box">
+        <p><strong>메시지:</strong> <span th:text="${message}">메시지</span></p>
+        <p><strong>숫자:</strong> <span th:text="${number}">0</span></p>
+        <p th:if="${time != null}">
+          <strong>시간:</strong>
+          <span th:text="${#temporals.format(time, 'yyyy-MM-dd HH:mm:ss')}">시간</span>
+        </p>
+        <p th:if="${active != null}">
+          <strong>활성 상태:</strong>
+          <span th:text="${active} ? '활성' : '비활성'"
+                th:classappend="${active} ? 'text-success' : 'text-danger'">상태</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 리스트 -->
+    <div class="section" th:if="${items != null}">
+      <h2>📋 리스트 데이터</h2>
+      <ul class="item-list">
+        <li th:each="item, iterStat : ${items}">
+          <span class="index" th:text="${iterStat.count}">1</span>
+          <span th:text="${item}">아이템</span>
+          <span th:if="${iterStat.first}" class="tag tag-blue">첫 번째</span>
+          <span th:if="${iterStat.last}" class="tag tag-green">마지막</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 객체 -->
+    <div class="section" th:if="${user != null}">
+      <h2>👤 객체 데이터</h2>
+      <div class="data-box">
+        <p><strong>이름:</strong> <span th:text="${user.name}">이름</span></p>
+        <p><strong>나이:</strong> <span th:text="${user.age}">나이</span></p>
+      </div>
+    </div>
+
+    <!-- Thymeleaf 표현식 예제 -->
+    <div class="section">
+      <h2>🔧 Thymeleaf 표현식 예제</h2>
+      <div class="expression-examples">
+        <h3>변수 표현식 (Variable Expression)</h3>
+        <code>${...}</code>
+        <p>예: <code th:text="${message}">메시지</code></p>
+
+        <h3>선택 변수 표현식 (Selection Variable Expression)</h3>
+        <code>*{...}</code>
+        <div th:object="${user}" th:if="${user != null}">
+          <p>예: <code th:text="*{name}">이름</code></p>
+        </div>
+
+        <h3>URL 표현식 (Link URL Expression)</h3>
+        <code>@{...}</code>
+        <p>예: <a th:href="@{/}">@{/}</a></p>
+
+        <h3>메시지 표현식 (Message Expression)</h3>
+        <code>#{...}</code>
+        <p>다국어 메시지 처리에 사용</p>
+
+        <h3>유틸리티 객체</h3>
+        <ul>
+          <li><code>${#lists}</code>: 리스트 관련 유틸</li>
+          <li><code>${#strings}</code>: 문자열 관련 유틸</li>
+          <li><code>${#numbers}</code>: 숫자 관련 유틸</li>
+          <li><code>${#dates}</code>: 날짜 관련 유틸</li>
+          <li><code>${#temporals}</code>: Java 8 날짜/시간 유틸</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 학습 포인트</h3>
+      <ul>
+        <li>Controller에서 Model에 다양한 타입의 데이터 추가</li>
+        <li>Thymeleaf에서 데이터 접근 및 표시</li>
+        <li>조건부 렌더링 (<code>th:if</code>, <code>th:unless</code>)</li>
+        <li>반복 (<code>th:each</code>)</li>
+        <li>유틸리티 객체 활용</li>
+      </ul>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/model-test/v1}" class="btn">Model v1</a>
+      <a th:href="@{/model-test/v2}" class="btn">ModelAndView v2</a>
+      <a th:href="@{/model-test/v3}" class="btn">addAllAttributes v3</a>
+      <a th:href="@{/}" class="btn btn-secondary">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

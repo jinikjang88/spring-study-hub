@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Java 21 Pattern Matching</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>🚀 Java 21 Pattern Matching</h1>
+
+    <div class="result-card">
+      <h2>테스트 결과</h2>
+      <div class="result-content">
+        <p><strong>입력 타입:</strong> <code th:text="${type}">type</code></p>
+        <p><strong>결과 메시지:</strong> <span th:text="${message}">message</span></p>
+      </div>
+    </div>
+
+    <div class="code-example">
+      <h3>📝 코드 예제</h3>
+      <pre><code>// Java 21 Enhanced Pattern Matching for switch
+String message = switch (result) {
+    case String s -> "문자열: " + s;
+    case Integer i -> "숫자: " + i;
+    case Boolean b -> "불린: " + b;
+    case null -> "null 값";
+    default -> "기타";
+};</code></pre>
+    </div>
+
+    <div class="feature-box">
+      <h3>✨ Java 21 Pattern Matching 특징</h3>
+      <ul>
+        <li><strong>타입 패턴:</strong> 타입 체크와 캐스팅을 동시에</li>
+        <li><strong>null 처리:</strong> null case 명시적 처리 가능</li>
+        <li><strong>가드 조건:</strong> when 절로 추가 조건 검사</li>
+        <li><strong>Record 패턴:</strong> Record 필드 분해 가능</li>
+      </ul>
+    </div>
+
+    <div class="test-links">
+      <h3>🧪 다른 타입 테스트</h3>
+      <div class="button-grid">
+        <a th:href="@{/java21/pattern/string}" class="btn">String 타입</a>
+        <a th:href="@{/java21/pattern/number}" class="btn">Number 타입</a>
+        <a th:href="@{/java21/pattern/boolean}" class="btn">Boolean 타입</a>
+        <a th:href="@{/java21/pattern/null}" class="btn">Null 타입</a>
+        <a th:href="@{/java21/pattern/unknown}" class="btn">Unknown 타입</a>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 Pattern Matching의 진화</h3>
+      <div class="evolution-timeline">
+        <div class="timeline-item">
+          <strong>Java 14</strong>
+          <p>instanceof 패턴 매칭 (Preview)</p>
+        </div>
+        <div class="timeline-item">
+          <strong>Java 16</strong>
+          <p>instanceof 패턴 매칭 (정식 릴리스)</p>
+        </div>
+        <div class="timeline-item">
+          <strong>Java 17</strong>
+          <p>switch 패턴 매칭 (Preview)</p>
+        </div>
+        <div class="timeline-item">
+          <strong>Java 21</strong>
+          <p>switch 패턴 매칭 강화 (정식 릴리스)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/java21/virtual-thread}" class="btn">Virtual Thread 예제</a>
+      <a th:href="@{/}" class="btn btn-secondary">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 상세 정보</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>회원 상세 정보</h1>
+
+    <div class="detail-card">
+      <div class="detail-header">
+        <h2 th:text="${member.name}">회원 이름</h2>
+        <span class="badge" th:text="'ID: ' + ${member.id}">ID: 1</span>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-row">
+          <span class="label">이름</span>
+          <span class="value" th:text="${member.name}">김철수</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">이메일</span>
+          <span class="value" th:text="${member.email}">kim@example.com</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">나이</span>
+          <span class="value">
+                            <span th:text="${member.age}">28</span>세
+            <!-- 조건부 표시 -->
+                            <span th:if="${member.age >= 20 and member.age < 30}" class="tag tag-green">20대</span>
+                            <span th:if="${member.age >= 30 and member.age < 40}" class="tag tag-blue">30대</span>
+                            <span th:if="${member.age >= 40}" class="tag tag-purple">40대 이상</span>
+                        </span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">회원 ID</span>
+          <span class="value" th:text="${member.id}">1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 Java 21 Record 사용</h3>
+      <ul>
+        <li>Member는 <code>record</code> 클래스로 구현됨</li>
+        <li>불변 객체 (Immutable)</li>
+        <li><code>member.name()</code> 대신 <code>member.name</code>으로 접근</li>
+        <li>자동으로 getter, equals, hashCode, toString 생성</li>
+      </ul>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/members}" class="btn">목록으로</a>
+      <a th:href="@{/api/members/{id}(id=${member.id})}" class="btn">JSON 보기</a>
+      <a th:href="@{/}" class="btn btn-secondary">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

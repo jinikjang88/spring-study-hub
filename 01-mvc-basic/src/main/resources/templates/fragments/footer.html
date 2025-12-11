@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<!-- 푸터 프래그먼트 -->
+<footer th:fragment="footer" class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Spring Study Hub</h3>
+        <p>Spring MVC 학습을 위한 예제 프로젝트</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>기술 스택</h3>
+        <ul>
+          <li>Spring Boot 4.0</li>
+          <li>Java 21</li>
+          <li>Thymeleaf</li>
+          <li>Gradle</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>학습 목표</h3>
+        <ul>
+          <li>Spring MVC 이해</li>
+          <li>Java 21 신기능</li>
+          <li>실무 패턴 습득</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Spring Study Hub. Created for learning purposes.</p>
+      <p class="tech-info">
+        Powered by
+        <span class="tech-badge">Spring Boot 4.0</span>
+        <span class="tech-badge">Java 21</span>
+        <span class="tech-badge">Virtual Threads</span>
+      </p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

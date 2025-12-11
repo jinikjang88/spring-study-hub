@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: mvc-basic
+
+  # Thymeleaf 설정
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+
+  # 정적 리소스 설정
+  web:
+    resources:
+      static-locations: classpath:/static/
+      add-mappings: true
+
+  # Virtual Threads 설정 (Spring Boot 4.0)
+  threads:
+    virtual:
+      enabled: true  # Virtual Threads 활성화
+
+  # Observability 설정 (Spring Boot 4.0 개선)
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,info,metrics,prometheus
+    metrics:
+      export:
+        prometheus:
+          enabled: true
+
+# 로깅 설정
+logging:
+  level:
+    root: INFO
+    com.jang.mvc.basic: DEBUG
+    org.springframework.web: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

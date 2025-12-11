@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Spring MVC Basic - Home</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <!-- 헤더 추가 -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1>Spring MVC Basic Study (Spring Boot 4.0)</h1>
+
+    <div class="welcome-box">
+      <h2 th:text="${message}">Welcome Message</h2>
+      <p>현재 시간: <span th:text="${#temporals.format(currentTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+      <p>Java 버전: <span th:text="${javaVersion}">21</span></p>
+      <p>Spring Boot 버전: <span th:text="${springBootVersion}">4.0</span></p>
+      <p>Virtual Thread: <span th:text="${isVirtualThread ? 'Enabled ✅' : 'Disabled ❌'}"
+                               th:classappend="${isVirtualThread ? 'text-success' : 'text-warning'}">
+                   Enabled
+                </span></p>
+    </div>
+
+    <div class="features">
+      <h2>🎯 학습 목표</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>🎨 Spring MVC 패턴</h3>
+          <p>Model-View-Controller 아키텍처의 동작 원리를 이해합니다.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔄 요청 처리 흐름</h3>
+          <p>DispatcherServlet부터 View 렌더링까지 전체 과정을 학습합니다.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 데이터 전달</h3>
+          <p>Model, ModelAndView를 활용한 데이터 전달 방법을 익힙니다.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🚀 Java 21 기능</h3>
+          <p>Virtual Threads, Record, Pattern Matching 등 최신 기능을 활용합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu">
+      <h2>📚 학습 메뉴</h2>
+
+      <div class="menu-section">
+        <h3>1️⃣ Spring MVC 기초</h3>
+        <ul>
+          <li><a th:href="@{/hello}">Hello World 예제</a> - 기본 Controller와 View</li>
+          <li><a th:href="@{/hello-param(name='철수')}">파라미터 전달</a> - @RequestParam 사용법</li>
+          <li><a th:href="@{/hello-mv}">ModelAndView</a> - Model과 View 함께 설정</li>
+          <li><a th:href="@{/model-test/v1}">Model 테스트</a> - 다양한 데이터 타입 전달</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <h3>2️⃣ 데이터 관리</h3>
+        <ul>
+          <li><a th:href="@{/members}">회원 목록 (HTML)</a> - View 템플릿 렌더링</li>
+          <li><a th:href="@{/api/members}">회원 목록 (JSON)</a> - REST API 응답</li>
+          <li><a th:href="@{/members/1}">회원 상세보기</a> - PathVariable 활용</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <h3>3️⃣ Java 21 신기능</h3>
+        <ul>
+          <li><a th:href="@{/java21/virtual-thread}">Virtual Threads</a> - 경량 스레드</li>
+          <li><a th:href="@{/java21/pattern/string}">Pattern Matching</a> - 강화된 switch 문</li>
+          <li><a th:href="@{/java21/sequenced}">Sequenced Collections</a> - 순서있는 컬렉션 API</li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <h3>4️⃣ 추가 정보</h3>
+        <ul>
+          <li><a th:href="@{/about}">About</a> - 프로젝트 소개</li>
+          <li><a th:href="@{/actuator/health}" target="_blank">Health Check</a> - Actuator 상태 확인</li>
+          <li><a th:href="@{/actuator/metrics}" target="_blank">Metrics</a> - 애플리케이션 메트릭</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>💡 Spring MVC 요청 처리 흐름</h3>
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <strong>1. 클라이언트 요청</strong>
+          <p>브라우저에서 HTTP 요청 전송</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>2. DispatcherServlet</strong>
+          <p>프론트 컨트롤러가 요청 수신</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>3. Handler Mapping</strong>
+          <p>요청을 처리할 Controller 찾기</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>4. Controller</strong>
+          <p>비즈니스 로직 수행, Model 생성</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>5. ViewResolver</strong>
+          <p>View 이름으로 실제 View 찾기</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>6. View (Thymeleaf)</strong>
+          <p>템플릿 렌더링, HTML 생성</p>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">
+          <strong>7. 클라이언트 응답</strong>
+          <p>완성된 HTML을 브라우저로 전송</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-stack-section">
+      <h2>⚙️ 기술 스택</h2>
+      <div class="tech-badges">
+                    <span class="tech-badge-large" title="Spring Boot 4.0">
+                        <span class="badge-icon">🍃</span>
+                        <span class="badge-text">Spring Boot 4.0</span>
+                    </span>
+        <span class="tech-badge-large" title="Java 21">
+                        <span class="badge-icon">☕</span>
+                        <span class="badge-text">Java 21</span>
+                    </span>
+        <span class="tech-badge-large" title="Thymeleaf">
+                        <span class="badge-icon">🌿</span>
+                        <span class="badge-text">Thymeleaf</span>
+                    </span>
+        <span class="tech-badge-large" title="Gradle">
+                        <span class="badge-icon">🐘</span>
+                        <span class="badge-text">Gradle</span>
+                    </span>
+        <span class="tech-badge-large" title="Virtual Threads">
+                        <span class="badge-icon">🧵</span>
+                        <span class="badge-text">Virtual Threads</span>
+                    </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸터 추가 -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

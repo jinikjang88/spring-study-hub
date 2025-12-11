@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>About - Spring MVC Basic</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="content">
+    <h1 th:text="${title}">About Spring MVC</h1>
+
+    <div class="about-section">
+      <p th:text="${description}" class="description">프로젝트 설명</p>
+    </div>
+
+    <div class="tech-stack">
+      <h2>기술 스택</h2>
+      <ul class="stack-list">
+        <li>
+          <strong>Spring Boot 4.0</strong>
+          <span>최신 Spring Boot 버전</span>
+        </li>
+        <li>
+          <strong>Java 21</strong>
+          <span>Virtual Threads, Pattern Matching, Record</span>
+        </li>
+        <li>
+          <strong>Spring MVC</strong>
+          <span>웹 애플리케이션 프레임워크</span>
+        </li>
+        <li>
+          <strong>Thymeleaf</strong>
+          <span>서버 사이드 템플릿 엔진</span>
+        </li>
+        <li>
+          <strong>Gradle</strong>
+          <span>빌드 도구</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="features">
+      <h2>학습 내용</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>🎯 MVC 패턴</h3>
+          <p>Model-View-Controller 아키텍처 이해</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔄 요청 흐름</h3>
+          <p>DispatcherServlet부터 View까지의 전체 흐름</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 데이터 전달</h3>
+          <p>Model, ModelAndView를 통한 데이터 전달</p>
+        </div>
+        <div class="feature-card">
+          <h3>🚀 Java 21</h3>
+          <p>Virtual Threads, Record, Pattern Matching</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <a th:href="@{/}" class="btn">홈으로</a>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>
